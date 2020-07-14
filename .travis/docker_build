@@ -9,6 +9,7 @@ VERSION="$(git describe --abbrev=0)"
 rest=${VERSION#?};
 
 docker build -t "phlummox/android-studio:${rest}"  .
+docker build -t "phlummox/android-studio:latest"  .
 
 set +ex
 
