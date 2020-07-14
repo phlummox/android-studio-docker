@@ -17,28 +17,26 @@ RUN dpkg --add-architecture i386 && \
       lib32stdc++6         \
       lib32z1              \
       libc6-i386           \
+      pv                   \
       unzip                \
       wget
 
 RUN \
-  wget -O /opt/android-studio-ide.tar.gz $ANDROID_STUDIO_URL
-
-RUN \
+  wget -O /opt/android-studio-ide.tar.gz $ANDROID_STUDIO_URL && \
   export sha="$(sha256sum /opt/android-studio-ide.tar.gz)" ; \
-  if [ "$sha" != "70c04dc542281c015a700fad73d7d62ce9dace774bc12050cad9f1d6363112eb  /opt/android-studio-ide.tar.gz" ]; then echo "SHA-256 Checksum mismatch, aborting installation"; rm -f /opt/android-studio-ide.tar.gz; exit 1; fi
-
-RUN \
-  cd /opt && tar xf android-studio-ide.tar.gz
-
-# && rm android-studio-ide.tar.gz
+  if [ "$sha" != "70c04dc542281c015a700fad73d7d62ce9dace774bc12050cad9f1d6363112eb  /opt/android-studio-ide.tar.gz" ]; then \
+      echo "SHA-256 Checksum mismatch, aborting installation"; \
+      rm -f /opt/android-studio-ide.tar.gz; exit 1; \
+    else \
+      cd /opt && tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz; \
+    fi
 
 USER gitpod
 
+# ?? needed??
 RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
-             && sdk install java 8.0.252.fx-zulu"
-
-RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
-             sdk default java 8.0.252.fx-zulu"
+             && sdk install java 8.0.252.fx-zulu \
+             && sdk default java 8.0.252.fx-zulu"
 
 RUN \
   mkdir -p $HOME/.local/bin && \
