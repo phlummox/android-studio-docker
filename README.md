@@ -3,7 +3,8 @@
 A Docker image designed to work with [Gitpod][gitpod], letting you run
 Android Studio as a cloud-based IDE.
 
-[[https://raw.githubusercontent.com/wiki/phlummox/android-studio-docker/using_images/studio-running.png]] \
+
+![Android studio rnning in the cloud](https://raw.githubusercontent.com/wiki/phlummox/android-studio-docker/using_images/studio-running.png) \
 &nbsp;
 
 [gitpod]: https://www.gitpod.io/
