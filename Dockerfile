@@ -27,6 +27,11 @@ RUN \
   export sha="$(sha256sum /opt/android-studio-ide.tar.gz)" ; \
   if [ "$sha" != "70c04dc542281c015a700fad73d7d62ce9dace774bc12050cad9f1d6363112eb  /opt/android-studio-ide.tar.gz" ]; then echo "SHA-256 Checksum mismatch, aborting installation"; rm -f /opt/android-studio-ide.tar.gz; exit 1; fi
 
+RUN \
+  cd /opt && tar xf android-studio-ide.tar.gz
+
+# && rm android-studio-ide.tar.gz
+
 USER gitpod
 
 RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
@@ -34,11 +39,6 @@ RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
 
 RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
              sdk default java 8.0.252.fx-zulu"
-
-#Pre-Depends: wget, coreutils
-#Depends: java-sdk, unzip
-#Recommends: libc6-i386, lib32stdc++6, lib32gcc1, lib32ncurses5, lib32z1
-#Suggests: default-jdk
 
 #RUN \
 #    apt-get update \
