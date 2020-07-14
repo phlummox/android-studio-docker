@@ -40,6 +40,21 @@ RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
 RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
              sdk default java 8.0.252.fx-zulu"
 
+RUN printf '\n\n. /home/gitpod/.sdkman/bin/sdkman-init.sh\n' | \
+  tee -a /home/gitpod/.bashrc
+
+# if running locally (versus, using gitpod in cloud),
+# /workspace won't exist, so create it
+RUN \
+  sudo mkdir -p /workspace/.gradle && \
+  sudo chown -R gitpod:gitpod /workspace
+
+ARG ANDROID_INSTALLATION_URL=https://github.com/phlummox/android-studio-docker/releases/download/v0.1/android-studio-installation.tar.xz
+
+RUN \
+  cd $HOME && \
+  curl -L $ANDROID_INSTALLATION_URL | tar x --xz
+
 #RUN \
 #    apt-get update \
 #    &&  DEBIAN_FRONTEND=noninteractive apt-get install -y \
