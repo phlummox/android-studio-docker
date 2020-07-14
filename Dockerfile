@@ -27,6 +27,14 @@ RUN \
   export sha="$(sha256sum /opt/android-studio-ide.tar.gz)" ; \
   if [ "$sha" != "70c04dc542281c015a700fad73d7d62ce9dace774bc12050cad9f1d6363112eb  /opt/android-studio-ide.tar.gz" ]; then echo "SHA-256 Checksum mismatch, aborting installation"; rm -f /opt/android-studio-ide.tar.gz; exit 1; fi
 
+USER gitpod
+
+RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
+             && sdk install java 8.0.252.fx-zulu"
+
+RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
+             sdk default java 8.0.252.fx-zulu"
+
 #Pre-Depends: wget, coreutils
 #Depends: java-sdk, unzip
 #Recommends: libc6-i386, lib32stdc++6, lib32gcc1, lib32ncurses5, lib32z1
@@ -119,10 +127,10 @@ RUN \
 #ARG ANDROID_STUDIO_URL=https://dl.google.com/dl/android/studio/ide-zips/3.5.3.0/android-studio-ide-191.6010548-linux.tar.gz
 #ARG ANDROID_STUDIO_VERSION=3.5
 
-RUN \
-  sudo apt-get install x11-apps
-
-RUN \
-  sudo apt-get install screen gosu 
-
-USER gitpod
+#RUN \
+#  sudo apt-get install x11-apps
+#
+#RUN \
+#  sudo apt-get install screen gosu 
+#
+#USER gitpod
