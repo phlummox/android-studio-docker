@@ -3,11 +3,23 @@ language: ruby
 services:
   - docker
 
-before_install:
-  - |
-    set -ex
-    make build
-    set +ex
+# docker hub login
+env:
+  global:
+  - secure: g18iMKLG5ryZmk/FVsTk2NHEPVI/PV8QyRTQhu/UNmNZs/5b1R6pTiKqgcDP+eCjIh7aDNfvHmJD6p4dOYOaMWdZuWS/gNY9f8Xf74MIjW1yvi/NXL0v11qvjXpYI3bnMB3tzG96S2u61Gtd3EOt2vleiziyZxjvGa12PbOxxvujdlcmXhoP43y2LdYdZvJl6Io45YlDkBKjPlmtfpMP0MCrizuBGOslHWJHp4RgVzjmLQVv2Op2yDYH5wl8IbQNcdcwTKahO6faj9JGHLMfqkM2pvSJPlLGqAwOVyWp/NMryn1COpKxkYKvv+NxPXPFoe3S/IvKi7AoAIq6elT8YR/3zaIxYQG3YMREn4pp5s0DP5+AlXv3+/WT/hoyEUtf10AIl/4A8tNNRRDgDiufzAknGcx0BYV+z6AaF5mEdo8l6ug5JKyEMyaj3FAE4O/Ij5EqqJLt+ahdtQhR9KErnPsGLVFuBtTU9H+29bsZ5eF8ySZTnowRY5ALPLoLcXYPAXhVz2h5nxEkmeoHZnnOqUUOH8O+xSik40RQnXNbJZvzEyiKPJ7ztsaS+BSC18Tz+KYRbcriXS9PglxMzba6oNNHxMqVs9XEloUJGMTPkmZbpPZhaBIGUb/uvr2ludGp1h6+pYdvYHgux7/Pk27p+H9RsgfZLd8LY/1Z1BuDLg8=
+  - secure: hnqD6XTWlGumIPuY8Y4Iv0rypjrm40hPUEgg7hsjKy7ReYrIVBVpyn2M1rx2M+9OEidqzZfGx7dWuFDkqWC08sVggkC2fxyfPPca4d8+a9Zhn9zgRpDdqLLLcrBZhcjmpQ2VOznhSKCsOvpBdjwlX+rw0itCoHtee5/99Puo95SDXPWHzNACpionZCSJE+dIaP5Y8Y/YFL7juGRlblSdC2Y2DdHB+++7gOh987ky0z51dPTX3fryWra2sDmXW1vDnMvoj98sM0UptY0o2+kuZL9rxNrIxX/ipBxbqUtxhJaQmny9diEifPZEEr6DLGtiau0R/+nzH+L0006smFHExiE5OKGFxJ8xqrbZJgK9mpBOTARu2AvxfUzuyPx0WOQaMs9Xa6fxCdgFL9NAwu+YtRI4bRWdh8TqWZZeTDFksSLtIO5F02NAoxtm/hPJR87mtJjlpM9B5+kWzYd58owQBEbRAU/h/FxJ/uoeCHv+4+K9jELihOb4LtQPv027wBjDRQtGn2mdS9+HxPFD5DVtEW6GB4qjM68Q+tUE3ibVBsnJylkmhYPKWaDpJ5wxnIXT96lg5HPS5isPXBSjUrir/qExQ2bK1p9jF3fqBXsi1FoMx/ZAeTIf8Kn2l7Kx759wEPbqlPhHoUy0GBXnyFMaXhGnxrCM+BDG23DyeRO+HMU=
+
 
 script:
-  - echo hi
+  - |
+    set -ex
+    bash .travis/docker_build
+    set +ex
+
+deploy:
+  provider: script
+  script: bash .travis/docker_push
+  on:
+    branch: master
+    tags: true
+

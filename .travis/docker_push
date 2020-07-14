@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -ex
+
+# find most recent tag
+VERSION="$(git describe --abbrev=0)"
+
+# only when first char in tag is "v"
+
+first_lett="${VERSION%"${VERSION#?}"}"
+
+if [[ ! "$first_lett"=="v" ]]; then
+  exit 0
+fi
+
+rest=${VERSION#?};
+
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+docker push "phlummox/gitpod-android-studio:${rest}"
+
+set +ex
