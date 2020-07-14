@@ -1,0 +1,13 @@
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - |
+    set -ex
+    make build
+    set +ex
+
+script:
+  - echo hi
