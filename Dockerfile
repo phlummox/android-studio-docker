@@ -31,17 +31,14 @@ RUN \
       cd /opt && tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz; \
     fi
 
-USER gitpod
+# fix display resolution
+RUN \
+  sed -i 's/1920x1080/1366x768/' /usr/bin/start-vnc-session.sh
 
-# ?? needed??
-RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
-             && sdk install java 8.0.252.fx-zulu \
-             && sdk default java 8.0.252.fx-zulu"
+USER gitpod
 
 RUN \
   mkdir -p $HOME/.local/bin && \
-  printf '\n\n. /home/gitpod/.sdkman/bin/sdkman-init.sh\n' | \
-      tee -a /home/gitpod/.bashrc && \
   printf '\nPATH=$HOME/.local/bin:$PATH\n' | \
       tee -a /home/gitpod/.bashrc && \
   ln -s /opt/android-studio/bin/studio.sh \
