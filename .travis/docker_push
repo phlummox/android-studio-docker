@@ -16,6 +16,7 @@ fi
 rest=${VERSION#?};
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-docker push "phlummox/gitpod-android-studio:${rest}"
+docker push "phlummox/android-studio:${rest}"
+docker push "phlummox/android-studio:latest"
 
 set +ex

@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+set -ex
+
 # find most recent tag
 VERSION="$(git describe --abbrev=0)"
 
 # drop first char
 rest=${VERSION#?};
 
-docker build -t "phlummox/gitpod-android-studio:${rest}"  .
+docker build -t "phlummox/android-studio:${rest}"  .
+
+set +ex
 
