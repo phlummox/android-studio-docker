@@ -1,4 +1,4 @@
-## android-studio-docker
+## android-studio-docker [WORK IN PROGRESS]
 
 [![Docker hub version](https://img.shields.io/docker/v/phlummox/android-studio?label=Docker%20Hub)](https://hub.docker.com/r/phlummox/android-studio)
 
@@ -9,6 +9,13 @@ Android Studio as a cloud-based IDE.
 &nbsp;
 
 [gitpod]: https://www.gitpod.io/
+
+### Current status
+
+-   Works, but -
+-   doesn't persist settings/downloaded plugins/SDKs etc
+
+## Usage
 
 ### Simple demo
 
