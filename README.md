@@ -22,7 +22,7 @@ Android Studio as a cloud-based IDE.
 See the [wiki][wiki-using] for brief instructions on how to use this instance
 in Gitpod on the web.
 
-[wiki-using]: wiki/using
+[wiki-using]: https://github.com/phlummox/android-studio-docker/wiki/using
 
 ### Use with your own GitHub project
 
